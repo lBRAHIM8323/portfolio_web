@@ -21,6 +21,72 @@
             position: relative;
         }
 
+        /* Top Navigation Buttons */
+        .top-nav {
+            position: fixed;
+            top: 2rem;
+            left: 2rem;
+            z-index: 1000;
+            display: flex;
+            gap: 1rem;
+            opacity: 0;
+            animation: slideInFromTop 1s ease 0.5s forwards;
+        }
+
+        .nav-btn {
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            border: 2px solid transparent;
+            backdrop-filter: blur(20px);
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border-color: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-2px);
+            background: rgba(102, 126, 234, 0.8);
+            border-color: rgba(102, 126, 234, 0.8);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        .nav-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .nav-btn:hover::before {
+            left: 100%;
+        }
+
+        .nav-btn i {
+            margin-right: 0.5rem;
+        }
+
+        @keyframes slideInFromTop {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
         /* Animated background elements */
         .bg-animation {
             position: absolute;
@@ -74,24 +140,24 @@
             padding: 2rem;
             position: relative;
             z-index: 2;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            padding-top: 6rem; /* Add space for top navigation */
         }
 
         .hero-section {
             display: grid;
             grid-template-columns: 1fr 1.2fr;
             gap: 4rem;
-            align-items: center;
+            align-items: flex-start;
             width: 100%;
+            padding-top: 2rem;
         }
 
         .profile-section {
             text-align: center;
             opacity: 0;
             animation: slideInLeft 1s ease 0.5s forwards;
+            position: sticky;
+            top: 2rem;
         }
 
         .profile-pic-container {
@@ -195,6 +261,7 @@
         .content-section {
             opacity: 0;
             animation: slideInRight 1s ease 0.7s forwards;
+            padding-top: 0;
         }
 
         .section-title {
@@ -312,61 +379,6 @@
             border: 1px solid rgba(102, 126, 234, 0.3);
         }
 
-        .cta-section {
-            text-align: center;
-            margin-top: 4rem;
-        }
-
-        .cta-buttons {
-            display: flex;
-            justify-content: center;
-            gap: 1.5rem;
-            flex-wrap: wrap;
-        }
-
-        .cta-btn {
-            padding: 1rem 2rem;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 1.1rem;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-            border: 2px solid transparent;
-        }
-
-        .cta-primary {
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            color: white;
-        }
-
-        .cta-secondary {
-            background: transparent;
-            color: white;
-            border-color: rgba(255, 255, 255, 0.3);
-        }
-
-        .cta-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 35px rgba(102, 126, 234, 0.4);
-        }
-
-        .cta-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-            transition: left 0.5s;
-        }
-
-        .cta-btn:hover::before {
-            left: 100%;
-        }
-
         .typing-animation {
             border-right: 2px solid #667eea;
             animation: blink 1s infinite;
@@ -406,10 +418,26 @@
 
         /* Responsive Design */
         @media (max-width: 968px) {
+            .top-nav {
+                position: relative;
+                top: 0;
+                left: 0;
+                justify-content: center;
+                margin-bottom: 2rem;
+            }
+            
+            .container {
+                padding-top: 2rem;
+            }
+            
             .hero-section {
                 grid-template-columns: 1fr;
                 gap: 3rem;
                 text-align: center;
+            }
+            
+            .profile-section {
+                position: static;
             }
             
             .profile-pic {
@@ -424,14 +452,21 @@
             .section-title {
                 font-size: 2rem;
             }
-            
-            .cta-buttons {
-                flex-direction: column;
-                align-items: center;
-            }
         }
 
         @media (max-width: 768px) {
+            .top-nav {
+                flex-direction: column;
+                width: 100%;
+                align-items: center;
+                gap: 0.5rem;
+            }
+            
+            .nav-btn {
+                width: 80%;
+                text-align: center;
+            }
+            
             .container {
                 padding: 1rem;
             }
@@ -449,9 +484,30 @@
                 grid-template-columns: 1fr;
             }
         }
+
+        @media (max-width: 480px) {
+            .top-nav {
+                top: 1rem;
+                left: 1rem;
+                right: 1rem;
+            }
+        }
+
     </style>
 </head>
 <body>
+    <!-- Top Navigation -->
+    <div class="top-nav">
+        <a href="/projects" class="nav-btn">
+            <i class="fas fa-rocket"></i>
+            View My Projects
+        </a>
+        <a href="/contact" class="nav-btn">
+            <i class="fas fa-envelope"></i>
+            Get In Touch
+        </a>
+    </div>
+
     <div class="bg-animation">
         <div class="floating-shape shape-1"></div>
         <div class="floating-shape shape-2"></div>
@@ -481,7 +537,7 @@
                 <h2 class="section-title">About Me</h2>
                 
                 <p class="bio-text">
-                    I am an aspiring AI/ML Engineer with over six months of hands-on experience in developing and deploying intelligent systems. I hold a B.Tech in Computer Science and Engineering and am currently working as an AI/ML Intern at PharynxAI, where I contribute to real-world applications involving machine learning and computer vision.
+                    I am an aspiring AI/ML Engineer with over six months of hands-on experience in developing and deploying intelligent systems. I hold a B.Tech in Computer Science and Engineering and am currently working as an AI/ML Intern at PharynxAI, where I contribute to real-world applications involving Gen AI and computer vision.
                 </p>
                 
                 <p class="bio-text">
@@ -493,7 +549,7 @@
                         <div class="highlight-icon">
                             <i class="fas fa-briefcase"></i>
                         </div>
-                        <h3 class="highlight-title">AI/ML Intern</h3>
+                        <h3 class="highlight-title">Artificial Intelligence/Machine Learning Intern</h3>
                         <p class="highlight-desc">PharynxAI</p>
                     </div>
                     
@@ -502,7 +558,7 @@
                             <i class="fas fa-globe"></i>
                         </div>
                         <h3 class="highlight-title">Global Ambassador</h3>
-                        <p class="highlight-desc">Responsible AI UAE</p>
+                        <p class="highlight-desc">Glocal Council of Responsible AI UAE Chapter</p>
                     </div>
                     
                     <div class="highlight-card">
@@ -542,24 +598,14 @@
                             <h4><i class="fas fa-brain"></i> Specialization</h4>
                             <div class="skill-tags">
                                 <span class="skill-tag">LLMs</span>
+                                <span class="skill-tag">RAG</span>
+                                <span class="skill-tag">AI Agents</span>
                                 <span class="skill-tag">Chatbots</span>
                                 <span class="skill-tag">Fine-tuning</span>
+                                <span class="skill-tag">Prompt Engineering</span>
                                 <span class="skill-tag">Object Detection</span>
                             </div>
                         </div>
-                    </div>
-                </div>
-
-                <div class="cta-section">
-                    <div class="cta-buttons">
-                        <a href="/projects" class="cta-btn cta-primary">
-                            <i class="fas fa-rocket"></i>
-                            View My Projects
-                        </a>
-                        <a href="/contact" class="cta-btn cta-secondary">
-                            <i class="fas fa-envelope"></i>
-                            Get In Touch
-                        </a>
                     </div>
                 </div>
             </div>
@@ -635,6 +681,17 @@
             
             link.addEventListener('mouseleave', function() {
                 this.style.transform = 'translateY(0) scale(1) rotate(0deg)';
+            });
+        });
+
+        // Navigation buttons animation
+        document.querySelectorAll('.nav-btn').forEach(btn => {
+            btn.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-3px) scale(1.02)';
+            });
+            
+            btn.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
             });
         });
 
