@@ -27,7 +27,7 @@
             content: '';
             position: fixed;
             top: -50%;
-            left: -50%;
+            right: -50%;
             width: 200%;
             height: 200%;
             background: radial-gradient(circle at 30% 20%, rgba(102, 126, 234, 0.1) 0%, transparent 50%),
@@ -52,7 +52,7 @@
         .navigation {
             position: fixed;
             top: 2rem;
-            right: 2rem;
+            left: 2rem;
             z-index: 1000;
             display: flex;
             gap: 1rem;
@@ -76,16 +76,16 @@
             content: '';
             position: absolute;
             top: 0;
-            left: -100%;
+            right: -100%;
             width: 100%;
             height: 100%;
             background: linear-gradient(45deg, #667eea, #764ba2);
-            transition: left 0.3s ease;
+            transition: right 0.3s ease;
             z-index: -1;
         }
 
         .nav-btn:hover::before {
-            left: 0;
+            right: 0;
         }
 
         .nav-btn:hover {
@@ -161,15 +161,15 @@
             content: '';
             position: absolute;
             top: 0;
-            left: -100%;
+            right: -100%;
             width: 100%;
             height: 100%;
             background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
-            transition: left 0.5s;
+            transition: right 0.5s;
         }
 
         .project-card:hover::before {
-            left: 100%;
+            right: 100%;
         }
 
         .project-card:hover {
@@ -237,12 +237,12 @@
             padding: 0.75rem 0 0.75rem 2rem;
             color: rgba(255, 255, 255, 0.9);
             line-height: 1.6;
-            border-left: 3px solid transparent;
+            border-right: 3px solid transparent;
             transition: all 0.3s ease;
         }
 
         .feature-list li:hover {
-            border-left-color: #667eea;
+            border-right-color: #667eea;
             background: rgba(102, 126, 234, 0.1);
             transform: translateX(5px);
         }
@@ -250,7 +250,7 @@
         .feature-list li::before {
             content: '▶';
             position: absolute;
-            left: 0;
+            right: 0;
             top: 0.75rem;
             color: #667eea;
             font-size: 0.8rem;
@@ -324,16 +324,16 @@
             content: '';
             position: absolute;
             top: 0;
-            left: -100%;
+            right: -100%;
             width: 100%;
             height: 100%;
             background: linear-gradient(45deg, #667eea, #764ba2);
-            transition: left 0.3s ease;
+            transition: right 0.3s ease;
             z-index: -1;
         }
 
         .project-link:hover::before {
-            left: 0;
+            right: 0;
         }
 
         .project-link:hover {
@@ -395,7 +395,7 @@
             .navigation {
                 position: relative;
                 top: auto;
-                right: auto;
+                left: auto;
                 justify-content: center;
                 margin-bottom: 2rem;
                 flex-wrap: wrap;
@@ -753,7 +753,7 @@
         function createSparkle(x, y) {
             const sparkle = document.createElement('div');
             sparkle.className = 'sparkle';
-            sparkle.style.left = x + 'px';
+            sparkle.style.right = x + 'px';
             sparkle.style.top = y + 'px';
             document.body.appendChild(sparkle);
 
@@ -795,7 +795,7 @@
         });
 
         // Add typing effect to header
-        function typeWriter(element, text, speed = 50) {
+        function typeWleftr(element, text, speed = 50) {
             let i = 0;
             element.innerHTML = '';
             
@@ -815,7 +815,7 @@
             if (headerText) {
                 const originalText = headerText.textContent;
                 setTimeout(() => {
-                    typeWriter(headerText, originalText, 30);
+                    typeWleftr(headerText, originalText, 30);
                 }, 1000);
             }
         });
@@ -874,7 +874,7 @@
             particle.style.pointerEvents = 'none';
             particle.style.zIndex = '1';
             
-            particle.style.left = Math.random() * window.innerWidth + 'px';
+            particle.style.right = Math.random() * window.innerWidth + 'px';
             particle.style.top = window.innerHeight + 'px';
             
             document.body.appendChild(particle);
